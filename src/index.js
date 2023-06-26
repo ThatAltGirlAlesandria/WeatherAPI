@@ -1,12 +1,11 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/styles.css';
 
 // Business Logic
 
 function getWeather(city) {
   let request = new XMLHttpRequest();
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.API_KEY}`;
 
   request.addEventListener("loadend", function() {
     const response = JSON.parse(this.responseText);
@@ -21,11 +20,16 @@ function getWeather(city) {
   request.send();
 }
 
+//function getAirPollution(city) {
+//  let request = new XMLHttpRequest();
+//const url =``
+//}
+
 // UI Logic
 
 function printElements(apiResponse, city) {
   document.querySelector('#showResponse').innerText = `The humidity in ${city} is ${apiResponse.main.humidity}%. 
-  The temperature in Kelvins is ${apiResponse.main.temp} degrees.`;
+  The temperature in Fahrenheit is ${apiResponse.main.temp} degrees.`;
 }
 
 function printError(request, apiResponse, city) {
